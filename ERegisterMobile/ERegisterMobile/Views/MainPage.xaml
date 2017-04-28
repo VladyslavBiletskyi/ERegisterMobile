@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ERegisterMobile"
              x:Class="ERegisterMobile.MainPage">
 
-	<Label Text="Welcome to Xamarin Forms!" 
+	<Label Text="Welcome to ERegister mobile app!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
 

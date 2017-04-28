@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ERegisterMobile.Views.SignInPage"
+             Title="SignInPage">
+  <ScrollView>
+    <StackLayout x:Name="SignInLayout" Spacing="10" Padding="10">
+            <Label Text="Sign In" FontSize="40"/>
+            <Label Text="Your e-mail"></Label>
+            <Entry x:Name="SignInEmail" Placeholder="e.mail@mail.provider"></Entry>
+            <Label Text="Your password"></Label>
+            <Entry x:Name="SignInPassword" Placeholder="********" IsPassword="True"></Entry>
+            <Button x:Name="SignInButton" Text="Sign In"></Button>
+            <Button x:Name="SignUpButton" Text="Sign Up" Clicked="SignUpButton_Clicked"></Button>
+        </StackLayout>
+  </ScrollView>
+</ContentPage>
