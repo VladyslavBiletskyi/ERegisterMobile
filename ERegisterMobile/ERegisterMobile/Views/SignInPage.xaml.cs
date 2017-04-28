@@ -16,21 +16,19 @@ namespace ERegisterMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignInPage : ContentPage
     {
-        private MainPage previous;
-        public SignInPage(MainPage previous)
+        public SignInPage()
         {
-            this.previous = previous;
             InitializeComponent();
         }
 
         public void SignIn()
         {
-            if (SignInEmail.Text == "Vladyslav" && SignInPassword.Text == "Password")
+            if (SignInEmail.Text == "vladyslav.biletskyi@nure.ua" && SignInPassword.Text == "Password")
             {
                 Application.Current.Properties["IsLogedIn"] = "true";
                 Application.Current.Properties["UserName"] = "Vladyslav Biletskyi";
-                previous.Navigation.PushAsync(new MenuPage());
-                previous.Navigation.PopModalAsync(true);
+                MessagingCenter.Send<Page>(this, "User is logged in");
+                Navigation.PopModalAsync(true);
             }
             else
             {
@@ -38,7 +36,7 @@ namespace ERegisterMobile.Views
             }
         }
 
-        private void SignUpButton_Clicked(object sender, EventArgs e)
+        private void SignInButton_Clicked(object sender, EventArgs e)
         {
             SignIn();
         }

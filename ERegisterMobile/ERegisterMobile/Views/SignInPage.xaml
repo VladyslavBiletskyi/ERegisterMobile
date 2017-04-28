@@ -10,8 +10,8 @@
             <Entry x:Name="SignInEmail" Placeholder="e.mail@mail.provider"></Entry>
             <Label Text="Your password"></Label>
             <Entry x:Name="SignInPassword" Placeholder="********" IsPassword="True"></Entry>
-            <Button x:Name="SignInButton" Text="Sign In"></Button>
-            <Button x:Name="SignUpButton" Text="Sign Up" Clicked="SignUpButton_Clicked"></Button>
+            <Button x:Name="SignInButton" Text="Sign In" Clicked="SignInButton_Clicked"></Button>
+            <Button x:Name="SignUpButton" Text="Sign Up" ></Button>
         </StackLayout>
   </ScrollView>
 </ContentPage>

@@ -13,20 +13,23 @@ namespace ERegisterMobile
         public MainPage()
         {
             InitializeComponent();
-            Application.Current.Properties.Remove("IsLogedIn");
             if (!Application.Current.Properties.ContainsKey("IsLogedIn") ||
                 String.IsNullOrEmpty((string) Application.Current.Properties["IsLogedIn"]))
             {
-                SignInPage sip = new SignInPage(this);
-                Navigation.PushModalAsync(sip, true);
+                SignInPage sip = new SignInPage();
+                Navigation.PushModalAsync(sip);
+                MessagingCenter.Subscribe<Page>(this, "User is logged in", OpenMenuPage);
             }
             else
             {
-                MenuPage mp = new MenuPage();
-                Navigation.PushAsync(mp);
-                Navigation.RemovePage(this);
+                OpenMenuPage(this);
             }
+        }
 
+        public void OpenMenuPage(Page page)
+        {
+            MenuPage mp = new MenuPage();
+            Navigation.PushAsync(mp,true);
         }
     }
 }

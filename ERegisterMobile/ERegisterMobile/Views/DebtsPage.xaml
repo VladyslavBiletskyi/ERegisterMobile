@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ERegisterMobile.Views.RegisterPage">
-    <StackLayout x:Name="RegisterLayout" Spacing="10" Padding="10">
-        <Label Text="You have no marks yet" FontSize="36"/>
+             x:Class="ERegisterMobile.Views.DebtsPage">
+    <StackLayout x:Name="DebtsLayout" Spacing="10" Padding="10">
+        <Label Text="You have no debts" FontSize="36"/>
     </StackLayout>
 </ContentPage>

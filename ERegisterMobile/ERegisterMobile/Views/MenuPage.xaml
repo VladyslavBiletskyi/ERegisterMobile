@@ -2,4 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ERegisterMobile.Views.MenuPage">
+    <StackLayout x:Name="MainMenuLayout" Spacing="10" Padding="10">
+        <Label Text="ERegister Mobile" FontSize="36"/>
+        <Button x:Name="ProfileButton" Text="My Profile" Clicked="ProfileButton_Clicked"></Button>
+        <Button x:Name="AbsentsButton" Text="My Absents" Clicked="AbsentsButton_OnClicked"></Button>
+        <Button x:Name="DebtsButton" Text="My Debts" Clicked="DebtsButton_Clicked"></Button>
+        <Button x:Name="RegisterButton" Text="My Register" Clicked="RegisterButton_Clicked"></Button>
+        <Button x:Name="SignOutButton" Text="Sign out" Clicked="SignOutButton_Clicked" Style="color=red"></Button>
+    </StackLayout>
 </ContentPage>

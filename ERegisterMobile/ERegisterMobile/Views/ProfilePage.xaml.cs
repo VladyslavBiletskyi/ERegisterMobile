@@ -15,6 +15,9 @@ namespace ERegisterMobile.Views
         public ProfilePage()
         {
             InitializeComponent();
+            FirstNameLabel.Text = Application.Current.Properties["UserName"]?.ToString().Split(' ')[0];
+            LastNameLabel.Text = Application.Current.Properties["UserName"]?.ToString().Split(' ')[1];
+            EmailLabel.Text = "vladyslav.biletskyi@nure.ua";
         }
     }
 }
