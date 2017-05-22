@@ -16,7 +16,8 @@ namespace ERegisterMobile.Views
         public RegisterPage()
         {
             InitializeComponent();
-            
+            RegisterDate.MaximumDate = DateTime.Now.Date;
+            GetRegister(DateTime.Now.Date);
         }
 
         public void GetRegister(DateTime date)
@@ -41,9 +42,10 @@ namespace ERegisterMobile.Views
         {
             Label header = new Label
             {
-                Text = "Your register on " + RegisterDate.Date.ToString("YYYY-MM-dd"),
+                Text = "Your register on " + RegisterDate.Date.ToString("dd.MM.yyyy"),
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
-                HorizontalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.Center,
+                TextColor=Color.Black
             };
             int i = 1;
             if (lessons.Count > 0)
