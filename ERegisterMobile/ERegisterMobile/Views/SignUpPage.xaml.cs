@@ -17,6 +17,14 @@ namespace ERegisterMobile.Views
         public SignUpPage()
         {
             InitializeComponent();
+            var model = (List<GroupViewModel>)HttpClientEngine.Get("api/Groups/Get", typeof(List<GroupViewModel>));
+            GroupIds = new List<int>();
+            SignUpGroup.Items.Clear();
+            foreach (var element in model)
+            {
+                SignUpGroup.Items.Add(element.Name);
+                GroupIds.Add(element.Id);
+            }
         }
 
         public async void SignUp()
@@ -59,19 +67,6 @@ namespace ERegisterMobile.Views
         private void SignUpButton_Clicked(object sender, EventArgs e)
         {
             SignUp();
-        }
-
-        private void SignUpGroup_Focused(object sender, FocusEventArgs e)
-        {
-            HttpClientEngine.AccessToken = Resources.First(x => x.Key == "token").Value.ToString();
-            var model = (List<GroupViewModel>)HttpClientEngine.Get("api/Groups/Get", typeof(List<GroupViewModel>));
-            GroupIds = new List<int>();
-            SignUpGroup.ItemsSource = model;
-            foreach (var element in model)
-            {
-                //SignUpGroup.Items.Add(element.Name);
-                GroupIds.Add(element.Id);
-            }
         }
     }
 }

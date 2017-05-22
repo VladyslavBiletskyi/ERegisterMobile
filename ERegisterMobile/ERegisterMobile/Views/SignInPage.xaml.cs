@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android.Content.Res;
 using ERegisterMobile.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,8 +23,6 @@ namespace ERegisterMobile.Views
             {
                 return;
             }
-            Application.Current.Properties["IsLogedIn"] = "true";
-            Application.Current.Properties["UserName"] = "Vladyslav Biletskyi";
             var list = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("grant_type", "password"),
@@ -33,22 +32,15 @@ namespace ERegisterMobile.Views
             try
             {
                 Dictionary<string, string> responce = (Dictionary<string, string>) (await HttpClientEngine.Token(list));
-                if (responce.ContainsKey("access_token"))
-                {
-                    Resources.Add("token", responce["access_token"]);
-                    HttpClientEngine.AccessToken = responce["access_token"];
-                }
-                else
-                {
-                    throw new Exception("Wrong email or password");
-                }
+                Application.Current.Properties.Add("token", responce["access_token"]);
+                HttpClientEngine.AccessToken = responce["access_token"];
+                MessagingCenter.Send<Page>(this, "User is logged in");
+                Navigation.PopModalAsync(true);
             }
             catch
             {
                 DisplayAlert("Error!", "Email or password is incorrect", "Ok");
             }
-            MessagingCenter.Send<Page>(this, "User is logged in");
-            Navigation.PopModalAsync(true);
         }
 
         private void SignInButton_Clicked(object sender, EventArgs e)

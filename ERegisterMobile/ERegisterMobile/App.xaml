@@ -4,6 +4,7 @@
              x:Class="ERegisterMobile.App">
 	<Application.Resources>
 		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+	    <ResourceDictionary>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

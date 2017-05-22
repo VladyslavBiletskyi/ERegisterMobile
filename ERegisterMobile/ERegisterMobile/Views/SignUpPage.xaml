@@ -10,7 +10,7 @@
         <Label Text="Your last name"></Label>
         <Entry x:Name="SignUpLastName" Placeholder="Ivanov"></Entry>
         <Label Text="Your group"></Label>
-        <Picker x:Name="SignUpGroup" Focused="SignUpGroup_Focused"></Picker>
+        <Picker x:Name="SignUpGroup"></Picker>
         <Label Text="Your e-mail"></Label>
         <Entry x:Name="SignUpEmail" Placeholder="e.mail@mail.provider"></Entry>
         <Label Text="Your password"></Label>

@@ -13,8 +13,8 @@ namespace ERegisterMobile
         public MainPage()
         {
             InitializeComponent();
-            if (!Application.Current.Properties.ContainsKey("IsLogedIn") ||
-                String.IsNullOrEmpty((string) Application.Current.Properties["IsLogedIn"]))
+            if (!Application.Current.Properties.ContainsKey("token") ||
+                String.IsNullOrEmpty((string) Application.Current.Properties["token"]))
             {
                 SignInPage sip = new SignInPage();
                 Navigation.PushModalAsync(sip);
