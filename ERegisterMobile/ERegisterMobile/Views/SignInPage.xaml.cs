@@ -55,5 +55,11 @@ namespace ERegisterMobile.Views
         {
             SignIn();
         }
+
+        private void SignUpButton_Clicked(object sender, EventArgs e)
+        {
+            SignUpPage sup = new SignUpPage();
+            Navigation.PushModalAsync(sup);
+        }
     }
 }

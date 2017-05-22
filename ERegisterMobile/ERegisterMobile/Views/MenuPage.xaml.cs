@@ -43,6 +43,7 @@ namespace ERegisterMobile.Views
         private void SignOutButton_Clicked(object sender, EventArgs e)
         {
             Application.Current.Properties.Remove("IsLogedIn");
+            Resources.Remove("token");
             Navigation.PushModalAsync(new SignInPage());
             Navigation.PopAsync();
         }

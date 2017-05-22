@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ERegisterMobile.Views.SignUpPage">
+    <ScrollView>
+    <StackLayout x:Name="SignUpLayout" Spacing="10" Padding="10">
+        <Label Text="Sign Up" FontSize="40"/>
+        <Label Text="Your first name"></Label>
+        <Entry x:Name="SignUpFirstName" Placeholder="Ivan"></Entry>
+        <Label Text="Your last name"></Label>
+        <Entry x:Name="SignUpLastName" Placeholder="Ivanov"></Entry>
+        <Label Text="Your group"></Label>
+        <Picker x:Name="SignUpGroup" Focused="SignUpGroup_Focused"></Picker>
+        <Label Text="Your e-mail"></Label>
+        <Entry x:Name="SignUpEmail" Placeholder="e.mail@mail.provider"></Entry>
+        <Label Text="Your password"></Label>
+        <Entry x:Name="SignUpPassword" Placeholder="********" IsPassword="True"></Entry>
+        <Label Text="Confirm your password"></Label>
+        <Entry x:Name="SignUpPasswordConfirm" Placeholder="********" IsPassword="True"></Entry>
+        <Button x:Name="SignUpButton" Text="Sign Up" Clicked="SignUpButton_Clicked"></Button>
+    </StackLayout>
+    </ScrollView>
+</ContentPage>
