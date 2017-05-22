@@ -38,6 +38,26 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AbsentsViewModel.cs" />
+    <Compile Include="Models\AddLessonViewModel.cs" />
+    <Compile Include="Models\AddMarksViewModel.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Models\DebtsViewModel.cs" />
+    <Compile Include="Models\GroupsViewModel.cs" />
+    <Compile Include="Models\LessonRegisterViewModel.cs" />
+    <Compile Include="Models\LessonViewModel.cs" />
+    <Compile Include="Models\MarkViewModel.cs" />
+    <Compile Include="Models\SignInViewModel.cs" />
+    <Compile Include="Models\SignUpViewModel.cs" />
+    <Compile Include="Models\StudentViewModel.cs" />
+    <Compile Include="Models\SubjectsViewModel.cs" />
+    <Compile Include="Models\UserDetailsViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\HttpService.cs" />
     <Compile Include="Views\AbsentsPage.xaml.cs">
       <DependentUpon>AbsentsPage.xaml</DependentUpon>
@@ -63,6 +83,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

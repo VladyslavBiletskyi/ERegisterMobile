@@ -5,14 +5,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Android;
+using Android.Content.Res;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace ERegisterMobile.Util
 {
-    class HttpService
+    public class HttpClientEngine
     {
+        private const string HostName = @"http://eregistersystem.azurewebsites.net/";
         private static HttpClient client;
+        public static string AccessToken = "";
 
         private static HttpClient Client
         {
@@ -20,57 +24,70 @@ namespace ERegisterMobile.Util
             {
                 if (client != null)
                 {
+                    if (!String.IsNullOrEmpty(AccessToken))
+                    {
+                        client.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue("Bearer", AccessToken);
+                    }
                     return client;
                 }
                 else
                 {
-                    client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization =
-                        new AuthenticationHeaderValue("Bearer", Application.Current.Resources["token"].ToString());
+                    client = CreateClient(AccessToken);
                     return client;
                 }
             }
         }
 
-        public static async Task<object> GetAsync(string urlPart, Type castType =null)
+        private static HttpClient CreateClient(string accessToken = "")
         {
-            HttpResponseMessage responce = await Client.GetAsync(""+urlPart);
-            if (responce.StatusCode != System.Net.HttpStatusCode.OK)
+            var client = new HttpClient();
+            if (!string.IsNullOrWhiteSpace(accessToken))
             {
-                throw new HttpRequestException();
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", accessToken);
             }
-            object result = JsonConvert.DeserializeObject(await responce.Content.ReadAsStringAsync(), castType);
-            return result;
+            return client;
         }
-        public static async Task<object> PostAsync(string urlPart, object data, Type castType = null)
+
+        public static object Get(string urlPart, Type castType = null)
+        {
+            var response = Client.GetAsync(HostName + urlPart).Result;
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new HttpRequestException("Ошибка при выполнении запроса");
+            }
+            string responseString = response.Content.ReadAsStringAsync().Result;
+            var json = JsonConvert.DeserializeObject(responseString, castType);
+            return json;
+        }
+
+        public static async Task<object> Post(string urlPart, object data, Type castType = null)
         {
             var myContent = JsonConvert.SerializeObject(data);
-            var buffer = Encoding.UTF8.GetBytes(myContent);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
-            HttpResponseMessage responce = await Client.PostAsync(""+urlPart, byteContent);
-            if (responce.StatusCode != System.Net.HttpStatusCode.OK)
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = Client.PostAsync(HostName + urlPart, byteContent).Result;
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                throw new HttpRequestException();
+                throw new HttpRequestException("Ошибка при выполнении запроса");
             }
-            object result = JsonConvert.DeserializeObject(await responce.Content.ReadAsStringAsync(), castType);
-            return result;
+            string responseString = await response.Content.ReadAsStringAsync();
+            var json = JsonConvert.DeserializeObject(responseString, castType);
+            return json;
         }
-        public static async Task<object> Token(string userName, string password)
+        public static async Task<object> Token(List<KeyValuePair<string, string>> data)
         {
-            var list = new List<KeyValuePair<string, string>>
+            var myContent = new FormUrlEncodedContent(data);
+            var response = Client.PostAsync(HostName + "token", myContent).Result;
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                new KeyValuePair<string, string>("grant_type", "password"),
-                new KeyValuePair<string, string>("UserName", userName),
-                new KeyValuePair<string, string>("Password", password),
-            };
-            var myContent = new FormUrlEncodedContent(list);
-            HttpResponseMessage responce = await Client.PostAsync("" + "token", myContent);
-            if (responce.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new HttpRequestException();
+                throw new HttpRequestException("Ошибка при выполнении запроса");
             }
-            object result = JsonConvert.DeserializeObject(await responce.Content.ReadAsStringAsync(), typeof(Dictionary<string,string>));
-            return result;
+            string responseString = await response.Content.ReadAsStringAsync();
+            var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
+            return json;
         }
     }
 }
