@@ -4,7 +4,9 @@
              x:Class="ERegisterMobile.Views.RegisterPage">
     <ScrollView>
     <StackLayout x:Name="RegisterLayout" Spacing="10" Padding="10">
-            <DatePicker x:Name="RegisterDate" DateSelected="RegisterDate_OnDateSelected"></DatePicker>
+            <Label>Select preferred day</Label>
+            <DatePicker x:Name="RegisterDate" DateSelected="RegisterDate_DateSelected"></DatePicker>
+            <StackLayout x:Name="Field"></StackLayout>
     </StackLayout>
     </ScrollView>
 </ContentPage>

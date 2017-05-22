@@ -16,7 +16,7 @@ namespace ERegisterMobile.Views
         public RegisterPage()
         {
             InitializeComponent();
-            RegisterDate.MaximumDate = DateTime.Now.Date.AddDays(1);
+            
         }
 
         public void GetRegister(DateTime date)
@@ -26,7 +26,9 @@ namespace ERegisterMobile.Views
             try
             {
                 lessons =
-                    (List<LessonViewModel>)HttpClientEngine.Get("api/Lessons/Register", typeof(List<LessonViewModel>));
+                    ((List<LessonViewModel>) HttpClientEngine.Get("api/Lessons/Register", 
+                    typeof(List<LessonViewModel>)))
+                    .Where(x=>x.BeginigDateTime.Date==date.Date).ToList();
                 FillElements(lessons);
             }
             catch
@@ -34,64 +36,77 @@ namespace ERegisterMobile.Views
                 DisplayAlert("Error!", "Error while filling debts", "Ok");
             }
         }
+
         private void FillElements(List<LessonViewModel> lessons)
         {
             Label header = new Label
             {
-                Text = "Your register on "+RegisterDate.Date.Date,
+                Text = "Your register on " + RegisterDate.Date.ToString("YYYY-MM-dd"),
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Center
             };
             int i = 1;
-            ListView listView = new ListView
+            if (lessons.Count > 0)
             {
-                HasUnevenRows = true,
-                ItemsSource = lessons,
-                ItemTemplate = new DataTemplate(() =>
+                ListView listView = new ListView
                 {
-                    Label elementNumberLabel = new Label
+                    HasUnevenRows = true,
+                    ItemsSource = lessons,
+                    ItemTemplate = new DataTemplate(() =>
                     {
-                        Text = "Mark №" + i++,
-                        HorizontalOptions = LayoutOptions.Center,
-                        TextColor = Color.Black
-                    };
-                    Label subjectLabel = new Label { Text = "Subject name" };
-                    Label subjectName = new Label { TextColor = Color.Black };
-                    subjectName.SetBinding(Label.TextProperty, "Subject");
-                    Label myMarkLabel = new Label { Text = "My result on lesson" };
-                    Label myMark = new Label { TextColor = Color.Black };
-                    myMark.SetBinding(Label.TextProperty, "Result");
-                    Label numberLabel = new Label { Text = "Number of present" };
-                    Label numberOfPresent = new Label { TextColor = Color.Black };
-                    numberOfPresent.SetBinding(Label.TextProperty, "NumberOfPresent");
-                    Label averrageMarkLabel = new Label { Text = "Average mark on lesson" };
-                    Label averageMark = new Label { TextColor = Color.Black };
-                    averageMark.SetBinding(Label.TextProperty, "AverageMark");
-                    return new ViewCell
-                    {
-                        View = new StackLayout
+                        Label elementNumberLabel = new Label
                         {
-                            Padding = new Thickness(0, 5),
-                            Orientation = StackOrientation.Vertical,
-                            Children = {
-                                elementNumberLabel,
-                                subjectLabel,
-                                subjectName,
-                                numberLabel,
-                                numberOfPresent,
-                                averrageMarkLabel,
-                                averageMark,
-                                myMarkLabel,
-                                myMark
+                            Text = "Mark №" + i++,
+                            HorizontalOptions = LayoutOptions.Center,
+                            TextColor = Color.Black
+                        };
+                        Label subjectLabel = new Label {Text = "Subject name"};
+                        Label subjectName = new Label {TextColor = Color.Black};
+                        subjectName.SetBinding(Label.TextProperty, "Subject");
+                        Label myMarkLabel = new Label {Text = "My result on lesson"};
+                        Label myMark = new Label {TextColor = Color.Black};
+                        myMark.SetBinding(Label.TextProperty, "Result");
+                        Label numberLabel = new Label {Text = "Number of present"};
+                        Label numberOfPresent = new Label {TextColor = Color.Black};
+                        numberOfPresent.SetBinding(Label.TextProperty, "NumberOfPresent");
+                        Label averrageMarkLabel = new Label {Text = "Average mark on lesson"};
+                        Label averageMark = new Label {TextColor = Color.Black};
+                        averageMark.SetBinding(Label.TextProperty, "AverageMark");
+                        return new ViewCell
+                        {
+                            View = new StackLayout
+                            {
+                                Padding = new Thickness(0, 5),
+                                Orientation = StackOrientation.Vertical,
+                                Children =
+                                {
+                                    elementNumberLabel,
+                                    subjectLabel,
+                                    subjectName,
+                                    numberLabel,
+                                    numberOfPresent,
+                                    averrageMarkLabel,
+                                    averageMark,
+                                    myMarkLabel,
+                                    myMark
+                                }
                             }
-                        }
-                    };
-                })
-            };
-            Content = new StackLayout { Children = { header, listView } };
+                        };
+                    })
+                };
+                Field.Children.Clear();
+                Field.Children.Add(header);
+                Field.Children.Add(listView);
+            }
+            else
+            {
+                Field.Children.Clear();
+                Field.Children.Add(header);
+                Field.Children.Add(new Label { Text = "You have no marks today", FontSize = 20 });
+            }
         }
 
-        private void RegisterDate_OnDateSelected(object sender, DateChangedEventArgs e)
+        private void RegisterDate_DateSelected(object sender, DateChangedEventArgs e)
         {
             GetRegister(RegisterDate.Date);
         }

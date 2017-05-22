@@ -38,49 +38,64 @@ namespace ERegisterMobile.Views
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Center
             };
-            int i = 1;          
-            ListView listView = new ListView
+            int i = 1;
+            if (lessons.Count > 0)
             {
-                HasUnevenRows = true,
-                ItemsSource = lessons,
-                ItemTemplate = new DataTemplate(() =>
+                ListView listView = new ListView
                 {
-                    Label elementNumberLabel = new Label { Text = "Absent №"+i++,
-                        HorizontalOptions = LayoutOptions.Center,
-                        TextColor = Color.Black };
-                    Label subjectLabel = new Label {Text = "Subject name"};
-                    Label subjectName = new Label { TextColor=Color.Black };
-                    subjectName.SetBinding(Label.TextProperty, "Subject");
-                    Label dateTimeLabel = new Label { Text = "Begining date and time of the lesson" };
-                    Label beginingDateTime = new Label { TextColor = Color.Black };
-                    beginingDateTime.SetBinding(Label.TextProperty, "BeginigDateTime");
-                    Label numberLabel = new Label { Text = "Number of present" };
-                    Label numberOfPresent = new Label { TextColor = Color.Black };
-                    numberOfPresent.SetBinding(Label.TextProperty, "NumberOfPresent");
-                    Label averrageMarkLabel = new Label { Text = "Average mark on lesson" };
-                    Label averageMark = new Label { TextColor = Color.Black };
-                    averageMark.SetBinding(Label.TextProperty, "AverageMark");
-                    return new ViewCell
+                    HasUnevenRows = true,
+                    ItemsSource = lessons,
+                    ItemTemplate = new DataTemplate(() =>
                     {
-                        View = new StackLayout
+                        Label elementNumberLabel = new Label
                         {
-                            Padding = new Thickness(0, 5),
-                            Orientation = StackOrientation.Vertical,
-                            Children = {
-                                elementNumberLabel,
-                                subjectLabel,
-                                subjectName,
-                                dateTimeLabel,
-                                beginingDateTime,
-                                numberLabel,
-                                numberOfPresent,
-                                averrageMarkLabel,
-                                averageMark }
-                        }
-                    };
-                })
-            };
-            Content = new StackLayout { Children = { header, listView } };
+                            Text = "Absent №" + i++,
+                            HorizontalOptions = LayoutOptions.Center,
+                            TextColor = Color.Black
+                        };
+                        Label subjectLabel = new Label {Text = "Subject name"};
+                        Label subjectName = new Label {TextColor = Color.Black};
+                        subjectName.SetBinding(Label.TextProperty, "Subject");
+                        Label dateTimeLabel = new Label {Text = "Begining date and time of the lesson"};
+                        Label beginingDateTime = new Label {TextColor = Color.Black};
+                        beginingDateTime.SetBinding(Label.TextProperty, "BeginigDateTime");
+                        Label numberLabel = new Label {Text = "Number of present"};
+                        Label numberOfPresent = new Label {TextColor = Color.Black};
+                        numberOfPresent.SetBinding(Label.TextProperty, "NumberOfPresent");
+                        Label averrageMarkLabel = new Label {Text = "Average mark on lesson"};
+                        Label averageMark = new Label {TextColor = Color.Black};
+                        averageMark.SetBinding(Label.TextProperty, "AverageMark");
+                        return new ViewCell
+                        {
+                            View = new StackLayout
+                            {
+                                Padding = new Thickness(0, 5),
+                                Orientation = StackOrientation.Vertical,
+                                Children =
+                                {
+                                    elementNumberLabel,
+                                    subjectLabel,
+                                    subjectName,
+                                    dateTimeLabel,
+                                    beginingDateTime,
+                                    numberLabel,
+                                    numberOfPresent,
+                                    averrageMarkLabel,
+                                    averageMark
+                                }
+                            }
+                        };
+                    })
+                };
+                Content = new StackLayout {Children = {header, listView}};
+            }
+            else
+            {
+                Content = new StackLayout
+                {
+                    Children = { header, new Label { Text = "You have no absents", FontSize = 20 } }
+                };
+            }
         }
     }
 }
