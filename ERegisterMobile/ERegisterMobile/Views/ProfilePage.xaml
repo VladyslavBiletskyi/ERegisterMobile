@@ -2,22 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ERegisterMobile.Views.ProfilePage">
-    <StackLayout x:Name="ProfileLayout" Spacing="10" Padding="10">
-        <Label Text="Your profile" FontSize="36"/>
+    <ScrollView>
+    <StackLayout x:Name="ProfileLayout">
+        <Label Text="Your profile" FontSize="26" HorizontalOptions="Center"/>
         <Label Text="First Name:"></Label>
         <Label x:Name="FirstNameLabel"></Label>
         <Label Text="Last Name:"></Label>
         <Label x:Name="LastNameLabel"></Label>
         <Label Text="Group:"></Label>
         <Label x:Name="GroupLabel"></Label>
-        
-        <Label Text="Change password" FontSize="36"/>
+
+        <Label Text="Change password" FontSize="26" HorizontalOptions="Center"/>
         <Label Text="Your old password"/>
         <Entry x:Name="OldPassword"></Entry>
         <Label Text="Your new password"/>
         <Entry x:Name="NewPassword"></Entry>
-        <Label Text="confirm your new password"/>
+        <Label Text="Confirm your new password"/>
         <Entry x:Name="ConfirmPassword"></Entry>
         <Button x:Name="ChangePasswordButton" Text="Apply Changes" Clicked="ChangePasswordButton_Clicked"></Button>
     </StackLayout>
+    </ScrollView>
 </ContentPage>

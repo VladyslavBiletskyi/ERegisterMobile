@@ -38,14 +38,16 @@ namespace ERegisterMobile.Views
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
                 HorizontalOptions = LayoutOptions.Center
             };
-            int i = 1;
+            int i = 1;          
             ListView listView = new ListView
             {
                 HasUnevenRows = true,
                 ItemsSource = lessons,
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    Label elementNumberLabel = new Label { Text = "Absent №"+i++, HorizontalOptions = LayoutOptions.Center };
+                    Label elementNumberLabel = new Label { Text = "Absent №"+i++,
+                        HorizontalOptions = LayoutOptions.Center,
+                        TextColor = Color.Black };
                     Label subjectLabel = new Label {Text = "Subject name"};
                     Label subjectName = new Label { TextColor=Color.Black };
                     subjectName.SetBinding(Label.TextProperty, "Subject");

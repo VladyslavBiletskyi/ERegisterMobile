@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ERegisterMobile.Views.RegisterPage">
+    <ScrollView>
     <StackLayout x:Name="RegisterLayout" Spacing="10" Padding="10">
-        <Label Text="You have no marks yet" FontSize="36"/>
+            <DatePicker x:Name="RegisterDate" DateSelected="RegisterDate_OnDateSelected"></DatePicker>
     </StackLayout>
+    </ScrollView>
 </ContentPage>
