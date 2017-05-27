@@ -14,11 +14,11 @@
 
         <Label Text="Change password" FontSize="26" HorizontalOptions="Center"/>
         <Label Text="Your old password"/>
-        <Entry x:Name="OldPassword"></Entry>
+        <Entry x:Name="OldPassword" IsPassword="True"></Entry>
         <Label Text="Your new password"/>
-        <Entry x:Name="NewPassword"></Entry>
+            <Entry x:Name="NewPassword" IsPassword="True"></Entry>
         <Label Text="Confirm your new password"/>
-        <Entry x:Name="ConfirmPassword"></Entry>
+            <Entry x:Name="ConfirmPassword" IsPassword="True"></Entry>
         <Button x:Name="ChangePasswordButton" Text="Apply Changes" Clicked="ChangePasswordButton_Clicked"></Button>
     </StackLayout>
     </ScrollView>
